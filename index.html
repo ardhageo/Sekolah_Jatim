@@ -41,7 +41,8 @@
         <script src="js/labels.js"></script>
         <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
         <script src="js/leaflet-measure.js"></script>
-        <script src="data/SekolahTingkatSMASederajat_25.js"></script>
+        <script src="data/SatuanPendidikanAmanBencanaSPAB_25.js"></script>
+        <script src="data/DataSekolahBahaya_26.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
@@ -273,7 +274,87 @@
                                               img_bounds_BahayaBanjir_24,
                                               {pane: 'pane_BahayaBanjir_24'});
         bounds_group.addLayer(layer_BahayaBanjir_24);
-        function pop_SekolahTingkatSMASederajat_25(feature, layer) {
+        function pop_SatuanPendidikanAmanBencanaSPAB_25(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">No</th>\
+                        <td>' + (feature.properties['No'] !== null ? autolinker.link(feature.properties['No'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SPAB</th>\
+                        <td>' + (feature.properties['SPAB'] !== null ? autolinker.link(feature.properties['SPAB'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">N</th>\
+                        <td>' + (feature.properties['N'] !== null ? autolinker.link(feature.properties['N'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">E</th>\
+                        <td>' + (feature.properties['E'] !== null ? autolinker.link(feature.properties['E'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Kecamatan</th>\
+                        <td>' + (feature.properties['Kecamatan'] !== null ? autolinker.link(feature.properties['Kecamatan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Kabupaten</th>\
+                        <td>' + (feature.properties['Kabupaten'] !== null ? autolinker.link(feature.properties['Kabupaten'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tanggal Pelaksanaan</th>\
+                        <td>' + (feature.properties['Tanggal Pelaksanaan'] !== null ? autolinker.link(feature.properties['Tanggal Pelaksanaan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tahun</th>\
+                        <td>' + (feature.properties['Tahun'] !== null ? autolinker.link(feature.properties['Tahun'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Jumlah Peserta</th>\
+                        <td>' + (feature.properties['Jumlah Peserta'] !== null ? autolinker.link(feature.properties['Jumlah Peserta'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Foto</strong><br />' + (feature.properties['Foto'] !== null ? '<img src="images/' + String(feature.properties['Foto']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SatuanPendidikanAmanBencanaSPAB_25_0() {
+            return {
+                pane: 'pane_SatuanPendidikanAmanBencanaSPAB_25',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,161,185,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_SatuanPendidikanAmanBencanaSPAB_25');
+        map.getPane('pane_SatuanPendidikanAmanBencanaSPAB_25').style.zIndex = 425;
+        map.getPane('pane_SatuanPendidikanAmanBencanaSPAB_25').style['mix-blend-mode'] = 'normal';
+        var layer_SatuanPendidikanAmanBencanaSPAB_25 = new L.geoJson(json_SatuanPendidikanAmanBencanaSPAB_25, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_SatuanPendidikanAmanBencanaSPAB_25',
+            layerName: 'layer_SatuanPendidikanAmanBencanaSPAB_25',
+            pane: 'pane_SatuanPendidikanAmanBencanaSPAB_25',
+            onEachFeature: pop_SatuanPendidikanAmanBencanaSPAB_25,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_SatuanPendidikanAmanBencanaSPAB_25_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_SatuanPendidikanAmanBencanaSPAB_25);
+        function pop_DataSekolahBahaya_26(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">ID</th>\
@@ -323,16 +404,108 @@
                         <th scope="row">Bujur</th>\
                         <td>' + (feature.properties['Bujur'] !== null ? autolinker.link(feature.properties['Bujur'].toLocaleString()) : '') + '</td>\
                     </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Banjir Bandang</th>\
+                        <td>' + (feature.properties['Bahaya Banjir Bandang'] !== null ? autolinker.link(feature.properties['Bahaya Banjir Bandang'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Banjir</th>\
+                        <td>' + (feature.properties['Bahaya Banjir'] !== null ? autolinker.link(feature.properties['Bahaya Banjir'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Covid-19</th>\
+                        <td>' + (feature.properties['Bahaya Covid-19'] !== null ? autolinker.link(feature.properties['Bahaya Covid-19'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Cuaca Ekstrem</th>\
+                        <td>' + (feature.properties['Bahaya Cuaca Ekstrem'] !== null ? autolinker.link(feature.properties['Bahaya Cuaca Ekstrem'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Epidemi dan Wabah Penyakit</th>\
+                        <td>' + (feature.properties['Bahaya Epidemi dan Wabah Penyakit'] !== null ? autolinker.link(feature.properties['Bahaya Epidemi dan Wabah Penyakit'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Erupsi Bromo</th>\
+                        <td>' + (feature.properties['Bahaya Erupsi Bromo'] !== null ? autolinker.link(feature.properties['Bahaya Erupsi Bromo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Erupsi Iyang Argopuro</th>\
+                        <td>' + (feature.properties['Bahaya Erupsi Iyang Argopuro'] !== null ? autolinker.link(feature.properties['Bahaya Erupsi Iyang Argopuro'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Erupsi  Iyang Ijen</th>\
+                        <td>' + (feature.properties['Bahaya Erupsi  Iyang Ijen'] !== null ? autolinker.link(feature.properties['Bahaya Erupsi  Iyang Ijen'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Erupsi Kelud</th>\
+                        <td>' + (feature.properties['Bahaya Erupsi Kelud'] !== null ? autolinker.link(feature.properties['Bahaya Erupsi Kelud'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Erupsi Lamongan</th>\
+                        <td>' + (feature.properties['Bahaya Erupsi Lamongan'] !== null ? autolinker.link(feature.properties['Bahaya Erupsi Lamongan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Erupsi Lawu</th>\
+                        <td>' + (feature.properties['Bahaya Erupsi Lawu'] !== null ? autolinker.link(feature.properties['Bahaya Erupsi Lawu'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Erupsi Raung</th>\
+                        <td>' + (feature.properties['Bahaya Erupsi Raung'] !== null ? autolinker.link(feature.properties['Bahaya Erupsi Raung'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Erupsi Semeru</th>\
+                        <td>' + (feature.properties['Bahaya Erupsi Semeru'] !== null ? autolinker.link(feature.properties['Bahaya Erupsi Semeru'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Erupsi Welirang</th>\
+                        <td>' + (feature.properties['Bahaya Erupsi Welirang'] !== null ? autolinker.link(feature.properties['Bahaya Erupsi Welirang'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Erupsi Wilis</th>\
+                        <td>' + (feature.properties['Bahaya Erupsi Wilis'] !== null ? autolinker.link(feature.properties['Bahaya Erupsi Wilis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Kegagalan Teknologi</th>\
+                        <td>' + (feature.properties['Bahaya Kegagalan Teknologi'] !== null ? autolinker.link(feature.properties['Bahaya Kegagalan Teknologi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Gelombang Ekstrem dan Abrasi</th>\
+                        <td>' + (feature.properties['Bahaya Gelombang Ekstrem dan Abrasi'] !== null ? autolinker.link(feature.properties['Bahaya Gelombang Ekstrem dan Abrasi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Gempa Bumi</th>\
+                        <td>' + (feature.properties['Bahaya Gempa Bumi'] !== null ? autolinker.link(feature.properties['Bahaya Gempa Bumi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Karhutla</th>\
+                        <td>' + (feature.properties['Bahaya Karhutla'] !== null ? autolinker.link(feature.properties['Bahaya Karhutla'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Kekeringan</th>\
+                        <td>' + (feature.properties['Bahaya Kekeringan'] !== null ? autolinker.link(feature.properties['Bahaya Kekeringan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Liquifaksi</th>\
+                        <td>' + (feature.properties['Bahaya Liquifaksi'] !== null ? autolinker.link(feature.properties['Bahaya Liquifaksi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Tanah Longsor</th>\
+                        <td>' + (feature.properties['Bahaya Tanah Longsor'] !== null ? autolinker.link(feature.properties['Bahaya Tanah Longsor'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bahaya Tsunami</th>\
+                        <td>' + (feature.properties['Bahaya Tsunami'] !== null ? autolinker.link(feature.properties['Bahaya Tsunami'].toLocaleString()) : '') + '</td>\
+                    </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_SekolahTingkatSMASederajat_25_0(feature) {
+        function style_DataSekolahBahaya_26_0(feature) {
             switch(String(feature.properties['Bentuk Pendidikan'])) {
                 case 'SLB':
                     return {
-                pane: 'pane_SekolahTingkatSMASederajat_25',
-                radius: 4.0,
+                pane: 'pane_DataSekolahBahaya_26',
+                radius: 6.000000000000002,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -341,14 +514,14 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(234,86,40,1.0)',
+                fillColor: 'rgba(229,142,132,1.0)',
                 interactive: true,
             }
                     break;
                 case 'SMA':
                     return {
-                pane: 'pane_SekolahTingkatSMASederajat_25',
-                radius: 4.0,
+                pane: 'pane_DataSekolahBahaya_26',
+                radius: 6.000000000000002,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -357,14 +530,14 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(21,225,154,1.0)',
+                fillColor: 'rgba(40,207,123,1.0)',
                 interactive: true,
             }
                     break;
                 case 'SMK':
                     return {
-                pane: 'pane_SekolahTingkatSMASederajat_25',
-                radius: 4.0,
+                pane: 'pane_DataSekolahBahaya_26',
+                radius: 6.000000000000002,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -373,14 +546,14 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(145,237,32,1.0)',
+                fillColor: 'rgba(199,48,216,1.0)',
                 interactive: true,
             }
                     break;
                 case 'SPK SMA':
                     return {
-                pane: 'pane_SekolahTingkatSMASederajat_25',
-                radius: 4.0,
+                pane: 'pane_DataSekolahBahaya_26',
+                radius: 6.000000000000002,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -389,32 +562,48 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(203,56,198,1.0)',
+                fillColor: 'rgba(194,238,82,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_DataSekolahBahaya_26',
+                radius: 6.000000000000002,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(111,139,205,1.0)',
                 interactive: true,
             }
                     break;
             }
         }
-        map.createPane('pane_SekolahTingkatSMASederajat_25');
-        map.getPane('pane_SekolahTingkatSMASederajat_25').style.zIndex = 425;
-        map.getPane('pane_SekolahTingkatSMASederajat_25').style['mix-blend-mode'] = 'normal';
-        var layer_SekolahTingkatSMASederajat_25 = new L.geoJson(json_SekolahTingkatSMASederajat_25, {
+        map.createPane('pane_DataSekolahBahaya_26');
+        map.getPane('pane_DataSekolahBahaya_26').style.zIndex = 426;
+        map.getPane('pane_DataSekolahBahaya_26').style['mix-blend-mode'] = 'normal';
+        var layer_DataSekolahBahaya_26 = new L.geoJson(json_DataSekolahBahaya_26, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_SekolahTingkatSMASederajat_25',
-            layerName: 'layer_SekolahTingkatSMASederajat_25',
-            pane: 'pane_SekolahTingkatSMASederajat_25',
-            onEachFeature: pop_SekolahTingkatSMASederajat_25,
+            dataVar: 'json_DataSekolahBahaya_26',
+            layerName: 'layer_DataSekolahBahaya_26',
+            pane: 'pane_DataSekolahBahaya_26',
+            onEachFeature: pop_DataSekolahBahaya_26,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_SekolahTingkatSMASederajat_25_0(feature));
+                return L.circleMarker(latlng, style_DataSekolahBahaya_26_0(feature));
             },
         });
-        bounds_group.addLayer(layer_SekolahTingkatSMASederajat_25);
-        map.addLayer(layer_SekolahTingkatSMASederajat_25);
+        bounds_group.addLayer(layer_DataSekolahBahaya_26);
+        map.addLayer(layer_DataSekolahBahaya_26);
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
@@ -426,7 +615,7 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
         var baseMaps = {};
-        L.control.layers(baseMaps,{'Sekolah Tingkat SMA/Sederajat<br /><table><tr><td style="text-align: center;"><img src="legend/SekolahTingkatSMASederajat_25_SLB0.png" /></td><td>SLB</td></tr><tr><td style="text-align: center;"><img src="legend/SekolahTingkatSMASederajat_25_SMA1.png" /></td><td>SMA</td></tr><tr><td style="text-align: center;"><img src="legend/SekolahTingkatSMASederajat_25_SMK2.png" /></td><td>SMK</td></tr><tr><td style="text-align: center;"><img src="legend/SekolahTingkatSMASederajat_25_SPKSMA3.png" /></td><td>SPK SMA</td></tr></table>': layer_SekolahTingkatSMASederajat_25,"Bahaya Banjir": layer_BahayaBanjir_24,"Bahaya Banjir Bandang": layer_BahayaBanjirBandang_23,"Bahaya Covid-19": layer_BahayaCovid19_22,"Bahaya Cuaca Ekstrem": layer_BahayaCuacaEkstrem_21,"Bahaya Epidemi dan Wabah": layer_BahayaEpidemidanWabah_20,"Bahaya Gagal Teknologi": layer_BahayaGagalTeknologi_19,"Bahaya Gelombang Ekstrem dan Abrasi": layer_BahayaGelombangEkstremdanAbrasi_18,"Bahaya Gempa Bumi": layer_BahayaGempaBumi_17,"Bahaya Karhutla": layer_BahayaKarhutla_16,"Bahaya Kekeringan": layer_BahayaKekeringan_15,"Bahaya Likuefaksi": layer_BahayaLikuefaksi_14,"Bahaya Tanah Longsor": layer_BahayaTanahLongsor_13,"Bahaya Tsunami": layer_BahayaTsunami_12,"Bahaya Erupsi Bromo": layer_BahayaErupsiBromo_11,"Bahaya Erupsi Iyang Argopuro": layer_BahayaErupsiIyangArgopuro_10,"Bahaya Erupsi Iyang Ijen": layer_BahayaErupsiIyangIjen_9,"Bahaya Erupsi Kelud": layer_BahayaErupsiKelud_8,"Bahaya Erupsi Lamongan": layer_BahayaErupsiLamongan_7,"Bahaya Erupsi Lawu": layer_BahayaErupsiLawu_6,"Bahaya Erupsi Raung": layer_BahayaErupsiRaung_5,"Bahaya Erupsi Semeru": layer_BahayaErupsiSemeru_4,"Bahaya Erupsi Welirang": layer_BahayaErupsiWelirang_3,"Bahaya Erupsi Wilis": layer_BahayaErupsiWilis_2,"Multi Bahaya": layer_MultiBahaya_1,"Google Earth": layer_GoogleEarth_0,}).addTo(map);
+        L.control.layers(baseMaps,{'Data Sekolah + Bahaya<br /><table><tr><td style="text-align: center;"><img src="legend/DataSekolahBahaya_26_SLB0.png" /></td><td>SLB</td></tr><tr><td style="text-align: center;"><img src="legend/DataSekolahBahaya_26_SMA1.png" /></td><td>SMA</td></tr><tr><td style="text-align: center;"><img src="legend/DataSekolahBahaya_26_SMK2.png" /></td><td>SMK</td></tr><tr><td style="text-align: center;"><img src="legend/DataSekolahBahaya_26_SPKSMA3.png" /></td><td>SPK SMA</td></tr><tr><td style="text-align: center;"><img src="legend/DataSekolahBahaya_26_4.png" /></td><td></td></tr></table>': layer_DataSekolahBahaya_26,'<img src="legend/SatuanPendidikanAmanBencanaSPAB_25.png" /> Satuan Pendidikan Aman Bencana (SPAB)': layer_SatuanPendidikanAmanBencanaSPAB_25,"Bahaya Banjir": layer_BahayaBanjir_24,"Bahaya Banjir Bandang": layer_BahayaBanjirBandang_23,"Bahaya Covid-19": layer_BahayaCovid19_22,"Bahaya Cuaca Ekstrem": layer_BahayaCuacaEkstrem_21,"Bahaya Epidemi dan Wabah": layer_BahayaEpidemidanWabah_20,"Bahaya Gagal Teknologi": layer_BahayaGagalTeknologi_19,"Bahaya Gelombang Ekstrem dan Abrasi": layer_BahayaGelombangEkstremdanAbrasi_18,"Bahaya Gempa Bumi": layer_BahayaGempaBumi_17,"Bahaya Karhutla": layer_BahayaKarhutla_16,"Bahaya Kekeringan": layer_BahayaKekeringan_15,"Bahaya Likuefaksi": layer_BahayaLikuefaksi_14,"Bahaya Tanah Longsor": layer_BahayaTanahLongsor_13,"Bahaya Tsunami": layer_BahayaTsunami_12,"Bahaya Erupsi Bromo": layer_BahayaErupsiBromo_11,"Bahaya Erupsi Iyang Argopuro": layer_BahayaErupsiIyangArgopuro_10,"Bahaya Erupsi Iyang Ijen": layer_BahayaErupsiIyangIjen_9,"Bahaya Erupsi Kelud": layer_BahayaErupsiKelud_8,"Bahaya Erupsi Lamongan": layer_BahayaErupsiLamongan_7,"Bahaya Erupsi Lawu": layer_BahayaErupsiLawu_6,"Bahaya Erupsi Raung": layer_BahayaErupsiRaung_5,"Bahaya Erupsi Semeru": layer_BahayaErupsiSemeru_4,"Bahaya Erupsi Welirang": layer_BahayaErupsiWelirang_3,"Bahaya Erupsi Wilis": layer_BahayaErupsiWilis_2,"Multi Bahaya": layer_MultiBahaya_1,"Google Earth": layer_GoogleEarth_0,}).addTo(map);
         setBounds();
         L.ImageOverlay.include({
             getBounds: function () {
