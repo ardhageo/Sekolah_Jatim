@@ -8,7 +8,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         html, body, #map {
@@ -24,8 +24,6 @@
             width: 200px;
         </style>
         <title>Peta Sebaran Sekolah Jatim</title>
-        </style>
-        <title></title>
     </head>
     <body>
         <div id="map">
@@ -39,8 +37,8 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
-        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
         <script src="js/leaflet-measure.js"></script>
+        <script src="js/leaflet-search.js"></script>
         <script src="data/SatuanPendidikanAmanBencanaSPAB_25.js"></script>
         <script src="data/DataSekolahBahaya_26.js"></script>
         <script>
@@ -309,10 +307,6 @@
                         <td>' + (feature.properties['Tahun'] !== null ? autolinker.link(feature.properties['Tahun'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Jumlah Peserta</th>\
-                        <td>' + (feature.properties['Jumlah Peserta'] !== null ? autolinker.link(feature.properties['Jumlah Peserta'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
                         <td colspan="2"><strong>Foto</strong><br />' + (feature.properties['Foto'] !== null ? '<img src="images/' + String(feature.properties['Foto']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
                     </tr>\
                 </table>';
@@ -505,7 +499,7 @@
                 case 'SLB':
                     return {
                 pane: 'pane_DataSekolahBahaya_26',
-                radius: 6.000000000000002,
+                radius: 6.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -521,7 +515,7 @@
                 case 'SMA':
                     return {
                 pane: 'pane_DataSekolahBahaya_26',
-                radius: 6.000000000000002,
+                radius: 6.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -537,7 +531,7 @@
                 case 'SMK':
                     return {
                 pane: 'pane_DataSekolahBahaya_26',
-                radius: 6.000000000000002,
+                radius: 6.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -553,7 +547,7 @@
                 case 'SPK SMA':
                     return {
                 pane: 'pane_DataSekolahBahaya_26',
-                radius: 6.000000000000002,
+                radius: 6.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -588,19 +582,16 @@
         });
         bounds_group.addLayer(layer_DataSekolahBahaya_26);
         map.addLayer(layer_DataSekolahBahaya_26);
-        var osmGeocoder = new L.Control.Geocoder({
-            collapsed: true,
-            position: 'topleft',
-            text: 'Search',
-            title: 'Testing'
-        }).addTo(map);
-        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
-        .className += ' fa fa-search';
-        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
-        .title += 'Search for a place';
         var baseMaps = {};
         L.control.layers(baseMaps,{'Data Sekolah + Bahaya<br /><table><tr><td style="text-align: center;"><img src="legend/DataSekolahBahaya_26_SLB0.png" /></td><td>SLB</td></tr><tr><td style="text-align: center;"><img src="legend/DataSekolahBahaya_26_SMA1.png" /></td><td>SMA</td></tr><tr><td style="text-align: center;"><img src="legend/DataSekolahBahaya_26_SMK2.png" /></td><td>SMK</td></tr><tr><td style="text-align: center;"><img src="legend/DataSekolahBahaya_26_SPKSMA3.png" /></td><td>SPK SMA</td></tr></table>': layer_DataSekolahBahaya_26,'<img src="legend/SatuanPendidikanAmanBencanaSPAB_25.png" /> Satuan Pendidikan Aman Bencana (SPAB)': layer_SatuanPendidikanAmanBencanaSPAB_25,"Bahaya Banjir": layer_BahayaBanjir_24,"Bahaya Banjir Bandang": layer_BahayaBanjirBandang_23,"Bahaya Covid-19": layer_BahayaCovid19_22,"Bahaya Cuaca Ekstrem": layer_BahayaCuacaEkstrem_21,"Bahaya Epidemi dan Wabah": layer_BahayaEpidemidanWabah_20,"Bahaya Gagal Teknologi": layer_BahayaGagalTeknologi_19,"Bahaya Gelombang Ekstrem dan Abrasi": layer_BahayaGelombangEkstremdanAbrasi_18,"Bahaya Gempa Bumi": layer_BahayaGempaBumi_17,"Bahaya Karhutla": layer_BahayaKarhutla_16,"Bahaya Kekeringan": layer_BahayaKekeringan_15,"Bahaya Likuefaksi": layer_BahayaLikuefaksi_14,"Bahaya Tanah Longsor": layer_BahayaTanahLongsor_13,"Bahaya Tsunami": layer_BahayaTsunami_12,"Bahaya Erupsi Bromo": layer_BahayaErupsiBromo_11,"Bahaya Erupsi Iyang Argopuro": layer_BahayaErupsiIyangArgopuro_10,"Bahaya Erupsi Iyang Ijen": layer_BahayaErupsiIyangIjen_9,"Bahaya Erupsi Kelud": layer_BahayaErupsiKelud_8,"Bahaya Erupsi Lamongan": layer_BahayaErupsiLamongan_7,"Bahaya Erupsi Lawu": layer_BahayaErupsiLawu_6,"Bahaya Erupsi Raung": layer_BahayaErupsiRaung_5,"Bahaya Erupsi Semeru": layer_BahayaErupsiSemeru_4,"Bahaya Erupsi Welirang": layer_BahayaErupsiWelirang_3,"Bahaya Erupsi Wilis": layer_BahayaErupsiWilis_2,"Multi Bahaya": layer_MultiBahaya_1,"Google Earth": layer_GoogleEarth_0,}).addTo(map);
         setBounds();
+        map.addControl(new L.Control.Search({
+            layer: layer_DataSekolahBahaya_26,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'Nama Satuan Pendidikan'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
         L.ImageOverlay.include({
             getBounds: function () {
                 return this._bounds;
